@@ -1096,7 +1096,7 @@ function M:fetch(job)
 	end
 
 	if next(updates) then
-		ya.mgr_emit("update_mimes", { updates = updates })
+		ya.emit("update_mimes", { updates = updates })
 	end
 
 	if #unknown > 0 then

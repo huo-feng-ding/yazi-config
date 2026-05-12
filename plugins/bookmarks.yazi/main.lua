@@ -62,8 +62,8 @@ local load_file_to_state = ya.sync(function(state,filename)
 		return
 	end
 
-	for line in file:lines() do
-		line = line:gsub("[\r\n]", "")
+	for line_itme in file:lines() do
+		local line = line_itme:gsub("[\r\n]", "")
 		local bookmark = string_split(line,"###")
 		if bookmark == nil or #bookmark < 4 then
 			goto nextline
@@ -298,7 +298,7 @@ return {
 				return
 			end
 
-			ya.mgr_emit(bookmarks[selected].isdir == "true" and "cd" or "reveal", { bookmarks[selected].file_url })
+			ya.emit(bookmarks[selected].isdir == "true" and "cd" or "reveal", { bookmarks[selected].file_url })
 
 			return
 		elseif action == "delete" then

@@ -246,7 +246,7 @@ function M:entry(job)
 	if (default_action == "nvim" or get_option() == "nvim" ) and args[1] ~= "fzf" then
 		os.execute("nvim +"..line_number.." -n "..file_url)
 	elseif (default_action == "jump" or get_option() == "jump" or args[1] == "fzf") and file_url ~= ""  then
-		ya.mgr_emit(file_url:match("[/\\]$") and "cd" or "reveal", { file_url })
+		ya.emit(file_url:match("[/\\]$") and "cd" or "reveal", { file_url })
 	else
 		return
 	end
@@ -277,7 +277,7 @@ end
 
 
 function M.fail(s, ...)
-	ya.mgr_emit("plugin", {"mount", "refresh" })
+	ya.emit("plugin", {"mount", "refresh" })
 	ya.notify { title = "fg", content = string.format(s, ...), timeout = 10, level = "error" }
 end
 

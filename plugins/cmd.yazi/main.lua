@@ -28,7 +28,7 @@ local function entry(_, job)
 
 	local target = output.stdout:gsub("\n$", "")
 	if target ~= "" then
-		ya.mgr_emit(target:find("[/\\]$") and "cd" or "reveal", { target })
+		ya.emit(target:find("[/\\]$") and "cd" or "reveal", { target })
 	end
 end
 

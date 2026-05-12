@@ -76,9 +76,10 @@ local function get_match_position(state, name, find_str)
     local match_start_byte = 0
     local match_start_char_index = 0
     local match_end_byte = 0
+	local char_index = 1
     
     -- 遍历所有UTF-8字符
-    for char_index = 1, #utf8_chars do
+    while char_index <= #utf8_chars do
         local current_char = utf8_chars[char_index]
         local char_byte_length = utf8_char_byte_length(current_char)
         local char_maps = state.mapdata[current_char]
@@ -402,21 +403,21 @@ return {
 				if INPUT_KEY[cand] == "<Enter>" then
 					local ok, _ = pcall(require, "lastopen")
 					if ok then
-						ya.mgr_emit("plugin", { "lastopen", ya.quote("open")})
+						ya.emit("plugin", { "lastopen", ya.quote("open")})
 					else
-						ya.mgr_emit("open", {})
+						ya.emit("open", {})
 					end
 					break
 				elseif INPUT_KEY[cand] == "n" then
 					url = get_next_match_file()
 					if url then
-						ya.mgr_emit("reveal", { url })
+						ya.emit("reveal", { url })
 					end
 					goto continue
 				elseif INPUT_KEY[cand] == "N" then
 					url = get_prev_match_file()
 					if url then
-						ya.mgr_emit("reveal", { url })
+						ya.emit("reveal", { url })
 					end
 					goto continue
 				elseif INPUT_KEY[cand] == "f" then
@@ -438,7 +439,7 @@ return {
 
 			url = get_first_match_file()
 			if url then
-				ya.mgr_emit("reveal", { url })
+				ya.emit("reveal", { url })
 			end
 
 			::continue::

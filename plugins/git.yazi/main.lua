@@ -97,7 +97,7 @@ local clear_state = ya.sync(function(st)
 end)
 
 local function update_git_status(path)
-	ya.mgr_emit("plugin", { "git"})	
+	ya.emit("plugin", { "git"})	
 end
 
 local is_in_git_dir = ya.sync(function(st)
@@ -109,7 +109,7 @@ local flush_empty_folder_status = ya.sync(function(st)
 	local folder = cx.active.current
 	if #folder.window == 0 then
 		clear_state()
-		ya.mgr_emit("plugin", { "git", ya.quote(tostring(cwd))})		
+		ya.emit("plugin", { "git", ya.quote(tostring(cwd))})		
 	end
 end)
 
@@ -159,7 +159,7 @@ local M = {
 			if st.cwd ~= cwd then
 				st.cwd = cwd
 				clear_state()
-				ya.mgr_emit("plugin", { "git"})		
+				ya.emit("plugin", { "git"})		
 			end
 			return ui.Line{}				
 		end

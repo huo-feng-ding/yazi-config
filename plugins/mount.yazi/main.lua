@@ -10,7 +10,7 @@ end)
 
 local subscribe = ya.sync(function(self)
 	ps.unsub("mount")
-	ps.sub("mount", function() ya.mgr_emit("plugin", { self._id, "refresh" }) end)
+	ps.sub("mount", function() ya.emit("plugin", { self._id, "refresh" }) end)
 end)
 
 local update_partitions = ya.sync(function(self, partitions)
@@ -124,7 +124,7 @@ function M:entry(job)
 			elseif run == "cd_quit" then
 				local active = active_partition()
 				if active and active.dist then
-					ya.mgr_emit("cd", { active.dist })
+					ya.emit("cd", { active.dist })
 				end
 				tx2:send(run)
 				toggle_ui()
@@ -140,10 +140,10 @@ function M:entry(job)
 			elseif run == "right" then
 				local active = active_partition()
 				if active and active.dist then
-					ya.mgr_emit("cd", { active.dist })
+					ya.emit("cd", { active.dist })
 				end
 			elseif run == "left" then
-				ya.mgr_emit("leave", {})
+				ya.emit("leave", {})
 			else
 				tx2:send(run)
 			end
@@ -327,7 +327,7 @@ function M.operate(type)
 	if not active then
 		return
 	elseif active.sub == "" then
-		ya.mgr_emit("plugin", {"mount", "refresh" })
+		ya.emit("plugin", {"mount", "refresh" })
 		return -- TODO: mount/unmount main disk
 	end
 
@@ -352,7 +352,7 @@ function M.operate(type)
 end
 
 function M.fail(s, ...) 
-	ya.mgr_emit("plugin", {"mount", "refresh" })
+	ya.emit("plugin", {"mount", "refresh" })
 	ya.notify { title = "Mount", content = string.format(s, ...), timeout = 10, level = "error" } 
 end
 

@@ -36,6 +36,13 @@ archive = [
 	{ run = 'ouch decompress "$1" ', orphan = true, desc = "ouch decompress" , for = "linux" },
 ]
 
+zip = [
+	# { run = 'basename "$@" | xargs tar xf ', orphan = true, desc = "tar xf" , for = "linux" },
+	# { run = 'basename "$@" | xargs tar xzf ', orphan = true, desc = "tar xzf" , for = "linux" },
+	{ run = 'unzip "$1"', orphan = true, desc = "unzip" , for = "linux" },
+	# { run = 'unar "$1"', orphan = true, desc = "unrar" , for = "linux" },
+]
+
 text = [
 	{ run = 'nvim "$1"', block = true,desc = "neovim", for = "linux" },
 	{ run = 'code  "$@"',orphan = true, desc = "vscode" , for = "linux" },
@@ -44,8 +51,8 @@ text = [
 	{ run = 'zathura "$@"',orphan = true, desc = "zathura"  , for = "linux" },
 ]
 image = [
-	{ run = 'sxiv -a "$@"',  orphan = true, desc = "sxiv" , for = "linux"},
-	{ run = 'mirage  "$@"',  orphan = true, desc = "mirage" , for = "linux"},
+	{ run = 'imv "$@"',  orphan = true, desc = "imv" , for = "linux"},
+	{ run = 'gthumb "$@"',  orphan = true, desc = "gthumb" , for = "linux"},
 ]
 video = [
 	{ run = 'mpv "$@" ', orphan = true, desc = "mpv" , for = "linux" },
@@ -58,8 +65,9 @@ audio = [
 
 document = [
 	{ run = 'xdg-open "$@"', orphan = true, desc = "xdg-open" , for = "linux" },
+	{ run = 'thorium "$@" ' , orphan = true, desc = "thorium" , for = "linux"},
 	{ run = 'okular "$@" ' , orphan = true, desc = "okular" , for = "linux"},
-	{ run = 'GTK_IM_MODULE=fcitx5 foliate "$@" ' , orphan = true, desc = "foliate" , for = "linux"},
+	# { run = 'foliate "$@" ' , orphan = true, desc = "foliate" , for = "linux"},
 ]
 
 fallback = [
@@ -78,7 +86,7 @@ rules = [
 	{ mime = "inode/empty", use = ["text"] },
 	{ mime = "application/json", use = ["text"] },
 
-	{ mime = "application/zip", use = ["archive"] },
+	{ mime = "application/zip", use = ["zip"] },
 	{ mime = "application/gzip", use = ["archive"] },
 	{ mime = "application/x-bzip", use = ["archive"] },
 	{ mime = "application/x-bzip2", use = ["archive"] },
@@ -106,6 +114,7 @@ if   = "!(mime|dummy)"
 url = "*"
 run  = "mime-ext"
 prio = "high"
+group = "mime"
 
 [[plugin.prepend_fetchers]]
 id   = "mime"
@@ -113,31 +122,37 @@ if   = "!(mime|dummy)"
 url = "*/"
 run  = "mime-ext"
 prio = "high"
+group = "mime"
 
 [[plugin.prepend_fetchers]]
 id   = "git"
 url = "*"
 run  = "git"
+group = "git"
 
 [[plugin.prepend_fetchers]]
 id   = "git"
 url = "*/"
 run  = "git"
+group = "git"
 
 
 [[plugin.prepend_fetchers]]
 id   = "current-size"
 url = "*"
 run  = "current-size"
+group = "current-size"
 
 [[plugin.prepend_fetchers]]
 id   = "current-size"
 url = "*/"
 run  = "current-size"
+group = "current-size"
 
 [[plugin.prepend_previewers]]
 url = "*.epub"
 run  = 'epub-preview'
+group = "epub"
 
 [[plugin.prepend_previewers]]
 url = "*.md"

@@ -75,7 +75,10 @@ require("current-size"):setup({
 	-- sub_ignore = {"~/deskenv/master","~/deskenv/dev"} -- sub path match
 })
 
-require("full-border"):setup()
+require("full-border"):setup {
+	-- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
+	type = ui.Border.ROUNDED,
+}
 
 require("mime-preview"):setup()
 

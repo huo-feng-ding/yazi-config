@@ -220,8 +220,8 @@ rules = [
 	{ mime = "application/x-mobipocket-ebook", fg = "#8bca4b" },
 
 	# Fallback
-	{ name = "*", fg = "#c5bf98" },
-	{ name = "*/", fg = "#d5af6d" }
+	{ url = "*", fg = "#c5bf98" },
+	{ url = "*/", fg = "#d5af6d" }
 ]
 
 
