@@ -138,6 +138,7 @@ local function get_match_position(state, name, find_str)
             -- 没有在进行中的匹配，正常前进
             byte_index = byte_index + char_byte_length
         end
+		char_index = char_index + 1
     end
     
     -- 返回结果

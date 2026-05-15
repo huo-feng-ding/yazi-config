@@ -98,10 +98,10 @@ require("lastopen"):setup({
 })
 require("mime-ext"):setup {
 	-- Expand the existing filename database (lowercase), for example:
-	-- with_files = {
-	-- 	makefile = "text/makefile",
-	-- 	-- ...
-	-- },
+	with_files = {
+		makefile = "text/makefile",
+		["meson.build"] = "text/plain",
+	},
 
 	-- Expand the existing extension database (lowercase), for example:
 	with_exts = require("mime-preview"):get_mime_data(),

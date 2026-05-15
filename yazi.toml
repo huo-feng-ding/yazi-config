@@ -72,6 +72,8 @@ document = [
 
 fallback = [
 	{ run = 'xdg-open "$@"', orphan = true, desc = "xdg-open" , for = "linux" },
+	{ run = 'nvim "$1"', block = true,desc = "neovim", for = "linux" },
+	{ run = 'nemo "$1"', block = true,desc = "nemo", for = "linux" },
 ]
 
 [open]
